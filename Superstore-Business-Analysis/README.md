@@ -282,7 +282,3 @@ Aspiring Data Analyst with a strong foundation in **SQL, Microsoft Excel, and Ta
 
 
 ---
-
-# 📄 License
-
-This project is licensed under the MIT License.
