@@ -2,172 +2,273 @@
 
 A production-style **FastAPI-based Alumni Intelligence and Prospect Research Platform** for managing alumni records, authentication, analytics, data import/export, company and city insights, and AI-assisted prospect research.
 
-The project demonstrates a modular backend architecture using **FastAPI, SQLAlchemy, SQLite, JWT authentication, Pydantic, Pandas, OpenPyXL, and optional LLM integration through OpenRouter**.
+This project demonstrates a modular backend architecture using **Python, FastAPI, SQLAlchemy, SQLite, JWT authentication, Pydantic, Pandas, OpenPyXL, web scraping, automated testing, and optional LLM integration**.
 
 ---
 
 ## 📌 Project Overview
 
-The Alumni Intelligence & Prospect Research Platform provides a centralized API for:
+The Alumni Intelligence & Prospect Research Platform provides a centralized API for collecting, managing, searching, analyzing, importing, exporting, and researching alumni information.
 
-* Managing alumni records
-* User registration and authentication
-* JWT-based authorization
-* Searching and filtering alumni
-* Pagination and sorting
-* Company and city analytics
-* CSV and Excel export
-* CSV data import
-* AI-assisted alumni/prospect research
-* Application health monitoring
-* Structured API documentation through Swagger UI
+The platform includes:
 
-The application is designed with a modular service-based architecture so that database operations, authentication, AI interactions, prompts, and business logic remain separated from the API routing layer.
+- Alumni record management
+- User registration and authentication
+- JWT-based authentication
+- Password hashing
+- Alumni search and filtering
+- Pagination and sorting
+- Alumni analytics
+- Company statistics
+- City statistics
+- CSV import
+- CSV export
+- Excel export
+- Web scraping
+- Data extraction and parsing
+- AI-assisted prospect research
+- Health monitoring
+- Request logging
+- Exception handling
+- Automated testing
+
+The application is structured using separate routers, services, models, security components, scraping modules, and utilities to demonstrate a maintainable backend architecture.
 
 ---
 
-## ✨ Key Features
-
-### 👤 Alumni Management
-
-* Create alumni records
-* Retrieve all alumni
-* Retrieve an individual alumnus by ID
-* Update alumni information
-* Delete alumni records
-* Search alumni by:
-
-  * Name
-  * Company
-  * City
-  * Designation
-* Pagination
-* Sorting by database columns
-* Ascending/descending ordering
+## 🚀 Features
 
 ### 🔐 Authentication & Security
 
-* User registration
-* User login
-* JWT access tokens
-* Current-user authentication
-* Token verification
-* Protected endpoints
-* Active-user validation
-* Configurable JWT expiration
+- User registration
+- User login
+- Password hashing
+- JWT access-token authentication
+- Current authenticated user
+- Token verification
+- Protected endpoints
+- Configurable token expiration
+- Environment-based configuration
+
+### 👥 Alumni Management
+
+The platform provides complete CRUD functionality for alumni records.
+
+**Operations**
+
+- Create alumni
+- Retrieve all alumni
+- Retrieve alumni by ID
+- Update alumni
+- Delete alumni
+- Search alumni
+- Pagination
+- Sorting
+
+**Search Filters**
+
+Alumni can be searched by:
+
+- Name
+- Company
+- City
+- Designation
 
 ### 📊 Analytics
 
-The platform provides:
+The application provides statistics for understanding the alumni database.
 
-* Overall alumni statistics
-* Company-wise statistics
-* City-wise statistics
+**Available Analytics**
 
-Example:
+- Total alumni
+- Total companies
+- Total cities
+- Company-level statistics
+- City-level statistics
 
-```json
-{
-  "total_alumni": 5,
-  "total_companies": 4,
-  "total_cities": 5
-}
-```
-
-The values depend on the records currently stored in the database.
+These endpoints demonstrate how operational data can be transformed into useful business insights.
 
 ### 📁 Data Import & Export
 
-Supported operations include:
+- **CSV Import** — Upload alumni records from a CSV file and process them through the application.
+- **CSV Export** — Export alumni records into a CSV file.
+- **Excel Export** — Export alumni records into an Excel workbook using OpenPyXL.
 
-* Export alumni data to CSV
-* Export alumni data to Excel
-* Import alumni records from CSV
+### 🤖 AI-Assisted Prospect Research
 
-Generated files can be stored in the project's `exports/` directory.
+The platform includes an AI-assisted research workflow for generating additional information about alumni prospects.
 
-### 🤖 AI Prospect Research
+The research workflow is designed around:
 
-The `/research/profile` endpoint generates a research profile from information such as:
+1. Alumni information
+2. Research request
+3. Data collection
+4. Data extraction
+5. Data parsing
+6. Prompt generation
+7. Optional LLM processing
+8. Research profile generation
 
-* Name
-* Company
-* Designation
-* Education
-* City
+The LLM service is separated from the rest of the application so that AI functionality can be configured independently.
 
-The system can enrich the profile with built-in company information such as:
+### 🌐 Web Scraping & Data Extraction
 
-* Industry
-* Company type
-* Headquarters
-* Founded year
-* Employee count
-* Website
+The project contains a modular scraping and extraction pipeline.
 
-The AI layer is designed to use configurable LLM providers/models and can operate in fallback mode when an external API key is not configured.
+Components include:
 
-### 🏥 Health Monitoring
+- Base scraper
+- Wikipedia scraper
+- HTML extraction
+- Data parsing
+- Data validation
+- Retry handling
 
-The application provides a health endpoint for checking whether the API is running correctly.
-
----
-
-# 🛠️ Tech Stack
-
-| Technology          | Purpose                          |
-| ------------------- | -------------------------------- |
-| **Python**          | Backend programming language     |
-| **FastAPI**         | REST API framework               |
-| **Uvicorn**         | ASGI server                      |
-| **SQLAlchemy**      | ORM/database interaction         |
-| **SQLite**          | Local relational database        |
-| **Pydantic**        | Data validation and schemas      |
-| **JWT**             | Authentication and authorization |
-| **python-jose**     | JWT implementation               |
-| **bcrypt**          | Password hashing                 |
-| **Pandas**          | Data processing                  |
-| **OpenPyXL**        | Excel import/export              |
-| **BeautifulSoup4**  | Web scraping/data extraction     |
-| **OpenAI SDK**      | LLM client interface             |
-| **OpenRouter**      | Optional LLM provider            |
-| **python-dotenv**   | Environment configuration        |
-| **Pytest**          | Testing                          |
-| **Swagger/OpenAPI** | Interactive API documentation    |
+The scraping components are separated from the API and service layers to make the system easier to extend.
 
 ---
 
-# 🏗️ Project Architecture
+## 🛠️ Tech Stack
 
-The application follows a modular backend architecture.
+**Backend**
+Python · FastAPI · Uvicorn · SQLAlchemy · SQLite · Pydantic
+
+**Authentication & Security**
+JWT · Python-JOSE · Passlib · Bcrypt · Cryptography
+
+**Data Processing**
+Pandas · NumPy · OpenPyXL
+
+**Web Scraping**
+Requests · BeautifulSoup · lxml
+
+**AI / LLM**
+OpenAI-compatible architecture · OpenRouter-compatible configuration · Configurable LLM service · Prompt-based research workflow
+
+**Testing**
+Pytest
+
+**Development**
+Git · GitHub · Visual Studio Code · Python virtual environment
+
+---
+
+## 🏗️ Project Structure
 
 ```text
 alumni-prospect-research/
 │
 ├── app/
 │   ├── auth/
-│   ├── config/
-│   ├── database/
-│   ├── exceptions/
-│   ├── imports/
-│   ├── middleware/
-│   ├── models/
-│   ├── prompts/
-│   ├── routers/
-│   ├── scraper/
-│   ├── security/
-│   ├── services/
-│   ├── utils/
+│   │   ├── dependencies.py
+│   │   └── security.py
 │   │
-│   ├── __init__.py
-│   └── main.py
+│   ├── config/
+│   │   ├── __init__.py
+│   │   └── settings.py
+│   │
+│   ├── database/
+│   │   ├── __init__.py
+│   │   ├── database.py
+│   │   └── init_db.py
+│   │
+│   ├── exceptions/
+│   │   └── __init__.py
+│   │
+│   ├── imports/
+│   │   └── csv_import.py
+│   │
+│   ├── middleware/
+│   │   ├── __init__.py
+│   │   ├── exception_handler.py
+│   │   └── request_logging.py
+│   │
+│   ├── models/
+│   │   ├── __init__.py
+│   │   ├── alumni.py
+│   │   ├── auth_schemas.py
+│   │   ├── response_models.py
+│   │   ├── schemas.py
+│   │   └── user.py
+│   │
+│   ├── prompts/
+│   │   └── prospect_prompt.txt
+│   │
+│   ├── routers/
+│   │   ├── __init__.py
+│   │   ├── alumni.py
+│   │   ├── auth.py
+│   │   ├── health.py
+│   │   └── research.py
+│   │
+│   ├── scraper/
+│   │   ├── __init__.py
+│   │   ├── base_scraper.py
+│   │   ├── extractor.py
+│   │   ├── parser.py
+│   │   └── wiki_scraper.py
+│   │
+│   ├── security/
+│   │   ├── jwt_handler.py
+│   │   └── password.py
+│   │
+│   ├── services/
+│   │   ├── __init__.py
+│   │   ├── company_service.py
+│   │   ├── database_service.py
+│   │   ├── etl_service.py
+│   │   ├── export_service.py
+│   │   ├── llm_service.py
+│   │   ├── prompt_service.py
+│   │   ├── research_service.py
+│   │   └── user_service.py
+│   │
+│   └── utils/
+│       ├── __init__.py
+│       ├── constants.py
+│       ├── helpers.py
+│       ├── logger.py
+│       ├── retry.py
+│       └── validators.py
 │
 ├── data/
-├── exports/
-├── logs/
+│   └── alumni.csv
+│
 ├── screenshots/
+│   ├── 01_swagger_home.png
+│   ├── 02_project_structure.png
+│   ├── 03_root_endpoint.png
+│   ├── 04_login.png
+│   ├── 05_current_user.png
+│   ├── 06_register.png
+│   ├── 07_verify_token.png
+│   ├── 08_create_alumni.png
+│   ├── 09_get_all_alumni.png
+│   ├── 10_search_alumni.png
+│   ├── 11_get_alumni_by_id.png
+│   ├── 12_update_alumni.png
+│   ├── 13_delete_alumni.png
+│   ├── 14_statistics.png
+│   ├── 15_city_statistics.png
+│   ├── 16_company_statistics.png
+│   ├── 17_export_csv.png
+│   ├── 18_export_excel.png
+│   ├── 19_import_csv.png
+│   ├── 20_ai_research_profile.png
+│   └── 21_health_check.png
+│
 ├── tests/
-├── uploads/
+│   ├── test_ai_pipeline.py
+│   ├── test_database.py
+│   ├── test_etl.py
+│   ├── test_export.py
+│   ├── test_extractor.py
+│   ├── test_llm.py
+│   ├── test_parser.py
+│   ├── test_prompt.py
+│   ├── test_research.py
+│   ├── test_scraper.py
+│   └── test_wiki_scraper.py
 │
 ├── .env.example
 ├── .gitignore
@@ -179,121 +280,32 @@ alumni-prospect-research/
 
 ---
 
-# 📂 Important Components
+## ⚙️ Installation
 
-### `app/routers/`
-
-Contains FastAPI route definitions and API endpoints.
-
-Examples:
-
-```text
-alumni.py
-auth.py
-research.py
-health.py
-```
-
-### `app/services/`
-
-Contains business logic separated from the API routes.
-
-Examples include:
-
-```text
-database_service.py
-company_service.py
-llm_service.py
-prompt_service.py
-research_service.py
-```
-
-### `app/models/`
-
-Contains database models and Pydantic request/response schemas.
-
-### `app/security/`
-
-Contains authentication and JWT-related functionality.
-
-### `app/prompts/`
-
-Contains reusable prompt templates used by the AI research service.
-
-### `app/config/`
-
-Centralizes application configuration and environment variables.
-
-### `exports/`
-
-Stores generated CSV and Excel files.
-
-### `uploads/`
-
-Stores uploaded files used by import operations.
-
-### `logs/`
-
-Stores application and error logs.
-
-### `tests/`
-
-Contains automated tests for application functionality.
-
----
-
-# 🚀 Installation
-
-## 1. Clone the repository
+### 1. Clone the Portfolio Repository
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/alumni-prospect-research.git
+git clone https://github.com/AshimaSharma-DataAnalyst/data-analyst-portfolio.git
+cd data-analyst-portfolio/alumni-prospect-research
 ```
 
-Navigate into the project:
+### 2. Create a Virtual Environment
+
+**Windows**
 
 ```bash
-cd alumni-prospect-research
-```
-
----
-
-## 2. Create a virtual environment
-
-### Windows PowerShell
-
-```powershell
 python -m venv .venv
-```
-
-Activate it:
-
-```powershell
 .\.venv\Scripts\Activate.ps1
 ```
 
-If PowerShell blocks script execution for the current session:
-
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
-```
-
-Then:
-
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
-
-### macOS/Linux
+If PowerShell blocks script execution:
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+.\.venv\Scripts\Activate.ps1
 ```
 
----
-
-## 3. Install dependencies
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -301,7 +313,7 @@ pip install -r requirements.txt
 
 ---
 
-# ⚙️ Environment Configuration
+## 🔑 Environment Configuration
 
 Create a `.env` file in the project root.
 
@@ -312,391 +324,146 @@ PROJECT_NAME=Alumni Intelligence & Prospect Research Platform
 
 DATABASE_URL=sqlite:///./alumni.db
 
-JWT_SECRET=CHANGE_THIS_TO_A_LONG_RANDOM_SECRET
-
+JWT_SECRET=replace-with-a-secure-secret
 JWT_ALGORITHM=HS256
-
 ACCESS_TOKEN_EXPIRE_MINUTES=60
 
-OPENROUTER_API_KEY=
-
 LLM_PROVIDER=openrouter
-
 LLM_MODEL=deepseek/deepseek-chat-v3-0324:free
-
-SECRET_KEY=CHANGE_THIS_SECRET
 ```
 
-### Important
+If an LLM API key is required for a specific deployment, configure it through the environment.
 
-Do **not** commit your actual `.env` file or API keys to GitHub.
-
-The project includes `.env.example` as a safe configuration template.
-
-The `.gitignore` file excludes:
-
-```text
-.env
-.venv/
-alumni.db
-logs/*.log
-uploads/*
-exports/*
-```
+> ⚠️ **Never commit `.env` files, API keys, passwords, or other secrets to GitHub.**
+> The repository includes `.env.example` as a safe configuration template.
 
 ---
 
-# 🤖 Optional AI Configuration
+## ▶️ Running the Application
 
-The AI research feature can be configured with an OpenRouter API key.
-
-For example:
-
-```env
-OPENROUTER_API_KEY=your_api_key_here
-```
-
-The application uses the OpenAI Python SDK with the OpenRouter API endpoint.
-
-If an API key is not configured, the application can use its built-in fallback research mode rather than preventing the rest of the application from running.
-
-This allows the core API functionality to be demonstrated without requiring an external paid AI service.
-
----
-
-# ▶️ Running the Application
-
-Start the FastAPI application with:
+From the project directory:
 
 ```bash
 python run.py
 ```
 
-The API will be available at:
+The application runs locally at:
 
-```text
+```
 http://127.0.0.1:8000
 ```
 
 ---
 
-# 📚 API Documentation
+## 📚 API Documentation
 
-FastAPI automatically provides interactive Swagger documentation.
+FastAPI automatically provides interactive API documentation.
 
-Open:
+| Docs Type | URL |
+|---|---|
+| Swagger UI | http://127.0.0.1:8000/docs |
+| ReDoc | http://127.0.0.1:8000/redoc |
 
-```text
-http://127.0.0.1:8000/docs
-```
-
-Swagger allows you to:
-
-* View available endpoints
-* Inspect request schemas
-* Enter parameters
-* Authenticate with JWT
-* Execute API requests
-* View response bodies
-* Test API functionality interactively
+Swagger UI allows users to interact with the API directly, including authentication, alumni management, analytics, import/export operations, research, and health checks.
 
 ---
 
-# 🔌 API Endpoints
+## 🔌 API Endpoints
 
-## System
+**Root**
 
-| Method | Endpoint  | Description             |
-| ------ | --------- | ----------------------- |
-| `GET`  | `/`       | Application information |
-| `GET`  | `/health` | Health/status check     |
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/` | Application information |
 
----
+**Authentication**
 
-## Authentication
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/auth/register` | Register a new user |
+| POST | `/auth/login` | Authenticate a user |
+| GET | `/auth/me` | Retrieve the current authenticated user |
+| POST | `/auth/verify-token` | Verify an authentication token |
 
-| Method | Endpoint             | Description                    |
-| ------ | -------------------- | ------------------------------ |
-| `POST` | `/auth/register`     | Register a new user            |
-| `POST` | `/auth/login`        | Authenticate user              |
-| `GET`  | `/auth/current-user` | Get current authenticated user |
-| `POST` | `/auth/verify-token` | Verify JWT token               |
+**Alumni**
 
-> Exact authentication route prefixes may be viewed in the generated Swagger documentation.
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/alumni/` | Create an alumni record |
+| GET | `/alumni/` | Retrieve alumni records |
+| GET | `/alumni/search` | Search alumni |
+| GET | `/alumni/{alumni_id}` | Retrieve an alumni record by ID |
+| PUT | `/alumni/{alumni_id}` | Update an alumni record |
+| DELETE | `/alumni/{alumni_id}` | Delete an alumni record |
 
----
+**Pagination & Sorting**
 
-# 👥 Alumni API
+The alumni listing endpoint supports:
 
-## Create Alumni
-
-```http
-POST /alumni/
-```
-
-Creates a new alumni record.
-
-Example request:
-
-```json
-{
-  "name": "Alex Johnson",
-  "company": "Microsoft",
-  "designation": "Data Analyst",
-  "education": "M.S. Computer Science",
-  "city": "Seattle"
-}
-```
-
----
-
-## Get All Alumni
-
-```http
-GET /alumni/
-```
-
-Supports:
-
-* Pagination
-* Sorting
-* Ascending/descending order
+- Page number
+- Page size
+- Sort column
+- Sort order
 
 Example:
 
-```text
+```
 /alumni/?page=1&size=10&sort_by=id&order=asc
 ```
 
----
+**Analytics**
 
-## Search Alumni
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/alumni/stats` | General alumni statistics |
+| GET | `/alumni/stats/companies` | Company statistics |
+| GET | `/alumni/stats/cities` | City statistics |
 
-```http
-GET /alumni/search
-```
+**Data Import & Export**
 
-Supported filters:
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/alumni/export/csv` | Export alumni records to CSV |
+| GET | `/alumni/export/excel` | Export alumni records to Excel |
+| POST | `/alumni/import/csv` | Import alumni records from CSV |
 
-```text
-name
-company
-city
-designation
-page
-size
-```
+**Research**
 
-Example:
+The application includes a dedicated research router for AI-assisted prospect research. The exact research endpoint and request schema can be explored through the Swagger documentation at `/docs`.
 
-```text
-/alumni/search?company=Microsoft
-```
+**Health**
 
----
-
-## Get Alumni by ID
-
-```http
-GET /alumni/{alumni_id}
-```
-
-Returns a specific alumni record.
-
-Example:
-
-```text
-/alumni/1
-```
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/health` | Application health check |
 
 ---
 
-## Update Alumni
+## 🧪 Testing
 
-```http
-PUT /alumni/{alumni_id}
-```
+The project includes automated tests for major components of the application.
 
-Updates an existing alumni record.
+Test coverage includes:
 
----
+- Database operations
+- ETL processing
+- Data export
+- Data extraction
+- Parsing
+- Prompt generation
+- Research workflow
+- Web scraping
+- Wikipedia scraping
+- LLM service
+- AI pipeline
 
-## Delete Alumni
-
-```http
-DELETE /alumni/{alumni_id}
-```
-
-Deletes an alumni record.
-
----
-
-# 📊 Statistics API
-
-## Overall Statistics
-
-```http
-GET /alumni/stats
-```
-
-Example response:
-
-```json
-{
-  "total_alumni": 5,
-  "total_companies": 4,
-  "total_cities": 5
-}
-```
-
----
-
-## Company Statistics
-
-```http
-GET /alumni/stats/companies
-```
-
-Returns alumni distribution by company.
-
----
-
-## City Statistics
-
-```http
-GET /alumni/stats/cities
-```
-
-Returns alumni distribution by city.
-
----
-
-# 📤 Export API
-
-## Export CSV
-
-```http
-GET /alumni/export/csv
-```
-
-Downloads:
-
-```text
-alumni.csv
-```
-
----
-
-## Export Excel
-
-```http
-GET /alumni/export/excel
-```
-
-Downloads:
-
-```text
-alumni.xlsx
-```
-
----
-
-# 📥 Import API
-
-## Import CSV
-
-```http
-POST /alumni/import/csv
-```
-
-Accepts an uploaded CSV file and imports alumni records into the database.
-
----
-
-# 🤖 AI Research API
-
-## Generate Research Profile
-
-```http
-POST /research/profile
-```
-
-Example request:
-
-```json
-{
-  "name": "Alex Johnson",
-  "company": "Microsoft",
-  "designation": "Data Analyst",
-  "education": "M.S. Computer Science",
-  "city": "Seattle"
-}
-```
-
-Example response structure:
-
-```json
-{
-  "name": "Alex Johnson",
-  "company": "Microsoft",
-  "designation": "Data Analyst",
-  "education": "M.S. Computer Science",
-  "city": "Seattle",
-  "industry": "Technology",
-  "company_type": "Public",
-  "headquarters": "Redmond, Washington, USA",
-  "website": "https://www.microsoft.com",
-  "summary": "..."
-}
-```
-
-The research service combines structured company information with the configured AI/fallback research mechanism.
-
----
-
-# 🔄 Application Flow
-
-```text
-                    ┌─────────────────────┐
-                    │      Client         │
-                    │ Swagger / Frontend  │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │     FastAPI         │
-                    │      Routers        │
-                    └──────────┬──────────┘
-                               │
-              ┌────────────────┼────────────────┐
-              ▼                ▼                ▼
-       ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
-       │   Security  │  │  Services   │  │ Middleware  │
-       │ JWT/Auth    │  │ Business    │  │ Logging     │
-       └─────────────┘  │ Logic       │  └─────────────┘
-                        └──────┬──────┘
-                               │
-                    ┌──────────┴──────────┐
-                    ▼                     ▼
-             ┌─────────────┐       ┌─────────────┐
-             │  SQLite +   │       │ AI Research │
-             │ SQLAlchemy  │       │ / Fallback  │
-             └─────────────┘       └─────────────┘
-```
-
----
-
-# 🧪 Testing
-
-The project includes a `tests/` directory for automated testing.
-
-Run tests using:
+Run the complete test suite:
 
 ```bash
 pytest
 ```
 
-For more detailed output:
+For detailed output:
 
 ```bash
 pytest -v
@@ -704,304 +471,184 @@ pytest -v
 
 ---
 
-# 📸 Screenshots
+## 📸 Screenshots
 
-The project includes screenshots demonstrating the major application features.
+The following screenshots demonstrate the application's functionality through the FastAPI Swagger interface.
 
-Screenshots are stored in:
+**API Documentation**
+
+| | | |
+|---|---|---|
+| ![Swagger Home](screenshots/01_swagger_home.png) | ![Project Structure](screenshots/02_project_structure.png) | ![Root Endpoint](screenshots/03_root_endpoint.png) |
+| 01 — Swagger Home | 02 — Project Structure | 03 — Root Endpoint |
+
+**🔐 Authentication**
+
+| | | |
+|---|---|---|
+| ![Login](screenshots/04_login.png) | ![Current User](screenshots/05_current_user.png) | ![Register](screenshots/06_register.png) |
+| 04 — Login | 05 — Current User | 06 — Register |
+
+| |
+|---|
+| ![Verify Token](screenshots/07_verify_token.png) |
+| 07 — Verify Token |
+
+**👥 Alumni Management**
+
+| | | |
+|---|---|---|
+| ![Create Alumni](screenshots/08_create_alumni.png) | ![Get All Alumni](screenshots/09_get_all_alumni.png) | ![Search Alumni](screenshots/10_search_alumni.png) |
+| 08 — Create Alumni | 09 — Get All Alumni | 10 — Search Alumni |
+
+| | | |
+|---|---|---|
+| ![Get Alumni by ID](screenshots/11_get_alumni_by_id.png) | ![Update Alumni](screenshots/12_update_alumni.png) | ![Delete Alumni](screenshots/13_delete_alumni.png) |
+| 11 — Get Alumni by ID | 12 — Update Alumni | 13 — Delete Alumni |
+
+**📊 Analytics**
+
+| | | |
+|---|---|---|
+| ![General Statistics](screenshots/14_statistics.png) | ![City Statistics](screenshots/15_city_statistics.png) | ![Company Statistics](screenshots/16_company_statistics.png) |
+| 14 — General Statistics | 15 — City Statistics | 16 — Company Statistics |
+
+**📁 Data Import & Export**
+
+| | | |
+|---|---|---|
+| ![CSV Export](screenshots/17_export_csv.png) | ![Excel Export](screenshots/18_export_excel.png) | ![CSV Import](screenshots/19_import_csv.png) |
+| 17 — CSV Export | 18 — Excel Export | 19 — CSV Import |
+
+**🤖 AI-Assisted Research**
+
+| |
+|---|
+| ![AI Research Profile](screenshots/20_ai_research_profile.png) |
+| 20 — AI Research Profile |
+
+**❤️ Health Monitoring**
+
+| |
+|---|
+| ![Health Check](screenshots/21_health_check.png) |
+| 21 — Health Check |
+
+---
+
+## 🔄 Application Workflow
 
 ```text
-screenshots/
+                         ┌──────────────────┐
+                         │      User        │
+                         └────────┬─────────┘
+                                  │
+                                  ▼
+                         ┌──────────────────┐
+                         │    FastAPI       │
+                         │      API         │
+                         └────────┬─────────┘
+                                  │
+              ┌───────────────────┼───────────────────┐
+              │                   │                   │
+              ▼                   ▼                   ▼
+       ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+       │    Auth     │     │   Alumni    │     │  Analytics  │
+       │    + JWT    │     │ Management  │     │             │
+       └─────────────┘     └──────┬──────┘     └─────────────┘
+                                  │
+                                  ▼
+                         ┌──────────────────┐
+                         │    SQLAlchemy    │
+                         │      SQLite      │
+                         └──────────────────┘
+
+              ┌───────────────────┼───────────────────┐
+              │                   │                   │
+              ▼                   ▼                   ▼
+       ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+       │ Import /    │     │  Research   │     │   Health    │
+       │   Export    │     │  Pipeline   │     │   Monitor   │
+       └─────────────┘     └──────┬──────┘     └─────────────┘
+                                  │
+                                  ▼
+                         ┌──────────────────┐
+                         │ Scraping /       │
+                         │ Extraction /     │
+                         │ Parsing / LLM    │
+                         └──────────────────┘
 ```
 
-## Swagger & Project
+---
 
-### Swagger API Home
+## 🧩 Architecture & Design Principles
 
-![Swagger Home](screenshots/01_swagger_home.png)
-
-### Project Structure
-
-![Project Structure](screenshots/02_project_structure.png)
-
-### Root Endpoint
-
-![Root Endpoint](screenshots/03_root_endpoint.png)
+- **Separation of Concerns** — API routes, business logic, database operations, authentication, scraping, AI services, and utilities are separated into dedicated modules.
+- **Service Layer** — Business logic is handled through service modules rather than placing all application logic directly inside API routes.
+- **Configuration Management** — Application configuration is managed through environment variables.
+- **Security** — Authentication, JWT handling, and password management are separated into dedicated security components.
+- **Data Validation** — Pydantic models and validation utilities are used to validate application data.
+- **Error Handling** — Middleware provides centralized exception handling.
+- **Logging** — Application requests and errors can be recorded using the project's logging utilities.
+- **Testability** — Major application components are separated into testable modules and covered by automated tests.
 
 ---
 
-## Authentication
+## 🔮 Future Improvements
 
-### User Registration
-
-![Register](screenshots/04_register.png)
-
-### User Login
-
-![Login](screenshots/05_login.png)
-
-### Current User
-
-![Current User](screenshots/06_current_user.png)
-
-### Verify Token
-
-![Verify Token](screenshots/07_verify_token.png)
-
----
-
-## Alumni Management
-
-### Create Alumni
-
-![Create Alumni](screenshots/08_create_alumni.png)
-
-### Get All Alumni
-
-![Get All Alumni](screenshots/09_get_all_alumni.png)
-
-### Search Alumni
-
-![Search Alumni](screenshots/10_search_alumni.png)
-
-### Get Alumni by ID
-
-![Get Alumni by ID](screenshots/11_get_alumni_by_id.png)
-
-### Update Alumni
-
-![Update Alumni](screenshots/12_update_alumni.png)
-
-### Delete Alumni
-
-![Delete Alumni](screenshots/13_delete_alumni.png)
+- PostgreSQL production database support
+- Redis caching
+- Background task processing
+- Celery-based asynchronous processing
+- Role-based access control
+- More advanced AI research workflows
+- Multiple LLM provider support
+- Automated company enrichment
+- Advanced alumni matching
+- Interactive analytics dashboard
+- React frontend
+- Docker containerization
+- GitHub Actions CI/CD
+- Cloud deployment
+- API rate limiting
+- Improved monitoring and observability
+- Expanded automated test coverage
 
 ---
 
-## Analytics
+## 📈 Skills Demonstrated
 
-### Overall Statistics
-
-![Statistics](screenshots/14_statistics.png)
-
-### Company Statistics
-
-![Company Statistics](screenshots/15_company_statistics.png)
-
-### City Statistics
-
-![City Statistics](screenshots/16_city_statistics.png)
+Python · FastAPI · REST API development · SQLAlchemy · SQLite · Database design · JWT authentication · Password security · Pydantic · Pandas · NumPy · Excel automation · CSV processing · ETL pipelines · Web scraping · Data extraction · Data parsing · API architecture · Service-layer architecture · AI/LLM integration · Prompt engineering · Error handling · Logging · Automated testing · Git · GitHub
 
 ---
 
-## Data Import & Export
+## 🎯 Portfolio Value
 
-### CSV Export
+This project demonstrates the combination of:
 
-![CSV Export](screenshots/17_export_csv.png)
+**Data Analytics + Python + SQL + ETL + Automation + API Development + AI**
 
-### Excel Export
+It showcases how a data-focused application can collect, validate, transform, analyze, export, and enrich information through a modular API-driven backend.
 
-![Excel Export](screenshots/18_export_excel.png)
-
-### CSV Import
-
-![CSV Import](screenshots/19_import_csv.png)
+The project also demonstrates practical software engineering practices such as authentication, environment-based configuration, service separation, logging, testing, and documentation.
 
 ---
 
-## AI Research
-
-### AI Research Profile
-
-![AI Research Profile](screenshots/20_ai_research_profile.png)
-
----
-
-## Health Monitoring
-
-### Health Check
-
-![Health Check](screenshots/21_health_check.png)
-
----
-
-# 🗂️ Generated Files
-
-The application can generate or use files such as:
-
-```text
-exports/
-├── alumni.csv
-└── alumni.xlsx
-
-logs/
-├── application.log
-└── errors.log
-
-uploads/
-└── uploaded CSV files
-```
-
-These runtime/generated files are excluded from version control where appropriate through `.gitignore`.
-
----
-
-# 🔒 Security Considerations
-
-The project follows several basic security practices:
-
-* Passwords are hashed before storage.
-* JWT tokens are used for authenticated API access.
-* Protected endpoints use authentication dependencies.
-* Environment variables are used for secrets and configuration.
-* `.env` is excluded from Git.
-* Runtime databases and generated files are excluded where appropriate.
-* API credentials should never be hardcoded into source code.
-
-For production deployment, replace development secrets with strong randomly generated values and configure environment variables through the deployment platform.
-
----
-
-# 🚀 Future Improvements
-
-Potential improvements include:
-
-### AI & Research
-
-* Live web-based prospect research
-* LinkedIn profile enrichment
-* More advanced LLM providers
-* AI-generated personalized outreach messages
-* Prospect scoring
-* Alumni engagement recommendations
-* Automated company research
-* Research result caching
-
-### Analytics
-
-* Interactive alumni dashboard
-* More advanced company analytics
-* Geographic visualizations
-* Alumni career progression analysis
-* Industry distribution charts
-* Time-based alumni trends
-
-### Data Management
-
-* Bulk Excel import
-* Duplicate detection
-* Data validation reports
-* Advanced filtering
-* Bulk update/delete operations
-* Import history
-
-### Authentication
-
-* Refresh tokens
-* Password reset
-* Email verification
-* Role-based access control
-* Admin/user permissions
-* OAuth authentication
-
-### Infrastructure
-
-* PostgreSQL support
-* Redis caching
-* Docker deployment
-* CI/CD pipeline
-* Cloud deployment
-* Production logging and monitoring
-
-### Frontend
-
-A dedicated frontend could be added using:
-
-* React
-* Next.js
-* Vue
-* Streamlit
-
-This could provide:
-
-* Alumni dashboard
-* Search interface
-* Analytics visualizations
-* AI research interface
-* Import/export controls
-* User management
-
----
-
-# 📈 Learning Outcomes
-
-This project demonstrates practical experience with:
-
-* REST API development
-* FastAPI
-* Python backend architecture
-* SQLAlchemy ORM
-* Relational databases
-* JWT authentication
-* Password hashing
-* Pydantic validation
-* API documentation
-* Pagination
-* Sorting and filtering
-* Data analytics
-* CSV/Excel processing
-* File uploads/downloads
-* AI/LLM integration
-* Environment-based configuration
-* Middleware and logging
-* Automated testing
-* Modular service architecture
-
----
-
-# 🎯 Project Highlights
-
-### Backend Engineering
-
-Built a modular FastAPI backend with separated routers, services, models, configuration, security, and database layers.
-
-### Data Analytics
-
-Implemented company and city-level statistics along with structured alumni search and reporting.
-
-### Data Engineering
-
-Added CSV import/export and Excel export capabilities for practical data management.
-
-### AI Integration
-
-Implemented an extensible LLM service with configurable models and fallback behavior.
-
-### Security
-
-Implemented JWT-based authentication and protected API endpoints.
-
-### API Design
-
-Provided interactive Swagger/OpenAPI documentation for testing and exploring the API.
-
----
-
-# 📄 License
-
-This project is licensed under the terms specified in the repository's `LICENSE` file.
-
----
-
-# 👩‍💻 Author
+## 👩‍💻 Author
 
 **Ashima Sharma**
 
-Data Analyst | Python | SQL | Power BI | Tableau | FastAPI | Data Analytics
+Data Analyst | Python | SQL | Power BI | Tableau | Excel | Data Analytics
+
+- GitHub: [https://github.com/AshimaSharma-DataAnalyst](https://github.com/AshimaSharma-DataAnalyst)
+- Portfolio: [https://github.com/AshimaSharma-DataAnalyst/data-analyst-portfolio](https://github.com/AshimaSharma-DataAnalyst/data-analyst-portfolio)
 
 ---
 
-## ⭐ Project Purpose
+## 📄 License
 
-This project was developed as a portfolio project to demonstrate practical backend development, data management, analytics, authentication, API design, and AI-assisted research capabilities in a real-world alumni intelligence use case.
+This project is available under the license included in the repository.
+
+---
+
+⭐ If you find this project useful, feel free to explore the repository and other projects in my data analytics portfolio.
